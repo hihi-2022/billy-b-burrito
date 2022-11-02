@@ -1,9 +1,17 @@
 import React from 'react'
+import { Route, Routes } from 'react-router-dom'
+
+//Import custom components
+import Nav from './Nav.jsx'
+import Home from './Home.jsx'
 
 function App() {
   return (
     <>
-      <h1>hello world!</h1>
+      <Nav />
+      <Routes>
+        <Route path="/" element={<Home />} />
+      </Routes>
     </>
   )
 }
