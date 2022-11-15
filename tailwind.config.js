@@ -2,7 +2,12 @@
 module.exports = {
   purge: {
     node: 'layers',
-    content: ['./client/components/**.jsx', './client/components/**/**.jsx'],
+    content: [
+      './client/components/**.jsx',
+      './client/components/**/**.jsx',
+      './client/components/orders/customer/**.jsx',
+      './client/components/orders/seller/**.jsx',
+    ],
   },
   darkMode: false, // or 'media' or 'class'
   theme: {

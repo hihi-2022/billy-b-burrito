@@ -3401,18 +3401,18 @@ function getTargetMatch(matches, location) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "getAllOrders": () => (/* binding */ getAllOrders),
 /* harmony export */   "submitOrder": () => (/* binding */ submitOrder)
 /* harmony export */ });
 /* harmony import */ var superagent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! superagent */ "./node_modules/superagent/lib/client.js");
 /* harmony import */ var superagent__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(superagent__WEBPACK_IMPORTED_MODULE_0__);
 
-function submitOrder() {
-  return superagent__WEBPACK_IMPORTED_MODULE_0___default().get('/api/order').then(res => res.body);
+function submitOrder(order) {
+  return superagent__WEBPACK_IMPORTED_MODULE_0___default().post('/api/orders').send(order).then(res => res.body);
 }
-
-// export function getOrders() {
-//   return request.get('/api/order').then((res) => res.body)
-// }
+function getAllOrders() {
+  return superagent__WEBPACK_IMPORTED_MODULE_0___default().get('/api/orders').then(res => res.body);
+}
 
 /***/ }),
 
@@ -3428,11 +3428,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
 /* harmony import */ var _common_Nav_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./common/Nav.jsx */ "./client/components/common/Nav.jsx");
 /* harmony import */ var _home_Home_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./home/Home.jsx */ "./client/components/home/Home.jsx");
 /* harmony import */ var _authentication_Login_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./authentication/Login.jsx */ "./client/components/authentication/Login.jsx");
-/* harmony import */ var _orders_Order__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./orders/Order */ "./client/components/orders/Order.jsx");
+/* harmony import */ var _orders_customer_Order__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./orders/customer/Order */ "./client/components/orders/customer/Order.jsx");
+/* harmony import */ var _orders_seller_Orders__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./orders/seller/Orders */ "./client/components/orders/seller/Orders.jsx");
 
 
 
@@ -3441,18 +3442,22 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 function App() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_common_Nav_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "bg-[#FDFCDC] text-black h-screen flex justify-center"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Routes, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Route, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Routes, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
     path: "/Login",
     element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_authentication_Login_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], null)
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Route, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
     path: "/Order",
-    element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_orders_Order__WEBPACK_IMPORTED_MODULE_4__["default"], null)
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Route, {
+    element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_orders_customer_Order__WEBPACK_IMPORTED_MODULE_4__["default"], null)
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
     path: "/",
     element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_home_Home_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], null)
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
+    path: "/Admin",
+    element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_orders_seller_Orders__WEBPACK_IMPORTED_MODULE_5__["default"], null)
   }))));
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (App);
@@ -3504,7 +3509,10 @@ function Nav() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
     to: "/",
     className: "btn btn-ghost normal-case text-xl text-white"
-  }, "Home")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+  }, "Home"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
+    to: "/Admin",
+    className: "btn btn-ghost normal-case text-xl text-white"
+  }, "Admin")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "flex-none"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
     to: "/Login",
@@ -3556,10 +3564,10 @@ function Home() {
 
 /***/ }),
 
-/***/ "./client/components/orders/ElementBool.jsx":
-/*!**************************************************!*\
-  !*** ./client/components/orders/ElementBool.jsx ***!
-  \**************************************************/
+/***/ "./client/components/orders/customer/ElementBool.jsx":
+/*!***********************************************************!*\
+  !*** ./client/components/orders/customer/ElementBool.jsx ***!
+  \***********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -3586,10 +3594,10 @@ function ElementBool(props) {
 
 /***/ }),
 
-/***/ "./client/components/orders/Order.jsx":
-/*!********************************************!*\
-  !*** ./client/components/orders/Order.jsx ***!
-  \********************************************/
+/***/ "./client/components/orders/customer/Order.jsx":
+/*!*****************************************************!*\
+  !*** ./client/components/orders/customer/Order.jsx ***!
+  \*****************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -3598,8 +3606,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _apiClient__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../apiClient */ "./client/apiClient.js");
-/* harmony import */ var _ElementBool__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ElementBool */ "./client/components/orders/ElementBool.jsx");
+/* harmony import */ var _apiClient__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../apiClient */ "./client/apiClient.js");
+/* harmony import */ var _ElementBool__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ElementBool */ "./client/components/orders/customer/ElementBool.jsx");
 
 
 
@@ -3609,13 +3617,15 @@ function Order() {
     rice: false,
     beans: false,
     lettuce: false,
-    quac: false,
+    quacamole: false,
     tomato: false,
     cheese: false,
     sour_cream: false
   });
   function handleOrder(e) {
     e.preventDefault();
+    // const orderToSubmit = JSON.stringify(order)
+    // console.log(orderToSubmit)
     (0,_apiClient__WEBPACK_IMPORTED_MODULE_1__.submitOrder)(order);
   }
   function handleInput(e) {
@@ -3623,7 +3633,7 @@ function Order() {
     const name = e.target.name;
     const newOrder = {
       ...order,
-      [name]: value
+      [`${name}`]: value
     };
     setOrder(newOrder);
   }
@@ -3632,8 +3642,13 @@ function Order() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
     className: "text-2xl text-center font-['Poor_Story']"
   }, "Current Estimated Wait time is x..."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    className: "bg-[#00AFB9] flex flex-col py-5 justify-items-center h-fit"
+    className: "bg-[#00AFB9] flex flex-col py-5 h-fit my-8"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+    htmlFor: "name"
+  }, "Please enter name for order: "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+    name: "name",
+    onChange: handleInput
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
     htmlFor: "filling"
   }, "Choose your main filling:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
     name: "filling",
@@ -3658,7 +3673,7 @@ function Order() {
     label: "Lettuce",
     handleInputFunc: handleInput
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ElementBool__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    name: "quac",
+    name: "quacamole",
     label: "Quacamole",
     handleInputFunc: handleInput
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ElementBool__WEBPACK_IMPORTED_MODULE_2__["default"], {
@@ -3674,10 +3689,83 @@ function Order() {
     label: "Sour Cream",
     handleInputFunc: handleInput
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+    className: "btn bg-slate-600 border-0 text-sm text-white my-2",
     onClick: handleOrder
   }, "Submit Order"))));
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Order);
+
+/***/ }),
+
+/***/ "./client/components/orders/seller/Order.jsx":
+/*!***************************************************!*\
+  !*** ./client/components/orders/seller/Order.jsx ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Order)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+function Order(props) {
+  const {
+    name,
+    filling,
+    rice,
+    beans,
+    lettuce,
+    tomato,
+    cheese,
+    sour_cream,
+    quacamole
+  } = props.order;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "flex mx-8 my-8"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+    className: "bg-slate-500 text-white list-none"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Name: ", name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Filling: ", filling), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Rice: ", rice), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Beans: ", beans), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Lettuce: ", lettuce), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Tomato: ", tomato), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Cheese: ", cheese), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Sour Cream: ", sour_cream), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Quacamole: ", quacamole)));
+}
+
+/***/ }),
+
+/***/ "./client/components/orders/seller/Orders.jsx":
+/*!****************************************************!*\
+  !*** ./client/components/orders/seller/Orders.jsx ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Orders)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _apiClient__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../apiClient */ "./client/apiClient.js");
+/* harmony import */ var _Order__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Order */ "./client/components/orders/seller/Order.jsx");
+
+
+
+function Orders() {
+  const [orders, setOrders] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
+  function handleClick(evt) {
+    evt.preventDefault();
+    console.log('getting orders..');
+    (0,_apiClient__WEBPACK_IMPORTED_MODULE_1__.getAllOrders)().then(latestOrder => {
+      setOrders(latestOrder);
+    }).catch(err => err.message);
+  }
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Latest orders"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+    onClick: handleClick
+  }, "Get latest orders"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "flex flex-wrap"
+  }, orders && orders.map(order => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Order__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    key: order.id,
+    order: order
+  }))));
+}
 
 /***/ }),
 

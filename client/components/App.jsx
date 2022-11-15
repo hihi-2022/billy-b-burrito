@@ -5,7 +5,8 @@ import { Route, Routes } from 'react-router-dom'
 import Nav from './common/Nav.jsx'
 import Home from './home/Home.jsx'
 import Login from './authentication/Login.jsx'
-import Order from './orders/Order'
+import Order from './orders/customer/Order'
+import Orders from './orders/seller/Orders'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/Login" element={<Login />} />
           <Route path="/Order" element={<Order />} />
           <Route path="/" element={<Home />} />
+          <Route path="/Admin" element={<Orders />} />
         </Routes>
       </div>
       {/* <Footer /> */}

@@ -8,6 +8,12 @@ function Nav() {
         <Link to="/" className="btn btn-ghost normal-case text-xl text-white">
           Home
         </Link>
+        <Link
+          to="/Admin"
+          className="btn btn-ghost normal-case text-xl text-white"
+        >
+          Admin
+        </Link>
       </div>
       <div className="flex-none">
         <Link

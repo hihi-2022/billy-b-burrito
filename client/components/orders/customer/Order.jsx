@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { submitOrder } from '../../apiClient'
+import { submitOrder } from '../../../apiClient'
 
 import ElementBool from './ElementBool'
 
@@ -9,7 +9,7 @@ function Order() {
     rice: false,
     beans: false,
     lettuce: false,
-    quac: false,
+    quacamole: false,
     tomato: false,
     cheese: false,
     sour_cream: false,
@@ -17,6 +17,8 @@ function Order() {
 
   function handleOrder(e) {
     e.preventDefault()
+    // const orderToSubmit = JSON.stringify(order)
+    // console.log(orderToSubmit)
     submitOrder(order)
   }
 
@@ -25,7 +27,7 @@ function Order() {
     const name = e.target.name
     const newOrder = {
       ...order,
-      [name]: value,
+      [`${name}`]: value,
     }
     setOrder(newOrder)
   }
@@ -36,8 +38,11 @@ function Order() {
       <h1 className="text-2xl text-center font-['Poor_Story']">
         Current Estimated Wait time is x...
       </h1>
-      <div className="bg-[#00AFB9] flex flex-col py-5 justify-items-center h-fit">
+      <div className="bg-[#00AFB9] flex flex-col py-5 h-fit my-8">
         <form>
+          <label htmlFor="name">Please enter name for order: </label>
+          <input name="name" onChange={handleInput}></input>
+          <br></br>
           <label htmlFor="filling">Choose your main filling:</label>
           <select name="filling" id="filling" onChange={handleInput}>
             {/* <option disabled selected value>
@@ -61,7 +66,7 @@ function Order() {
             handleInputFunc={handleInput}
           />
           <ElementBool
-            name="quac"
+            name="quacamole"
             label="Quacamole"
             handleInputFunc={handleInput}
           />
@@ -80,7 +85,12 @@ function Order() {
             label="Sour Cream"
             handleInputFunc={handleInput}
           />
-          <button onClick={handleOrder}>Submit Order</button>
+          <button
+            className="btn bg-slate-600 border-0 text-sm text-white my-2"
+            onClick={handleOrder}
+          >
+            Submit Order
+          </button>
         </form>
       </div>
     </div>
