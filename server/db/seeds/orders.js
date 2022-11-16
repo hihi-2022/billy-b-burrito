@@ -13,6 +13,7 @@ exports.seed = async function (knex) {
       quacamole: true,
       sour_cream: true,
       cheese: true,
+      order_status: 'in queue',
     },
     {
       id: 2,
@@ -25,6 +26,7 @@ exports.seed = async function (knex) {
       quacamole: true,
       sour_cream: true,
       cheese: true,
+      order_status: 'in queue',
     },
     {
       id: 3,
@@ -37,6 +39,7 @@ exports.seed = async function (knex) {
       quacamole: true,
       sour_cream: false,
       cheese: true,
+      order_status: 'in queue',
     },
   ])
 }

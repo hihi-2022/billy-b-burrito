@@ -5,7 +5,7 @@ import { Route, Routes } from 'react-router-dom'
 import Nav from './common/Nav.jsx'
 import Home from './home/Home.jsx'
 import Login from './authentication/Login.jsx'
-import Order from './orders/customer/Order'
+import Order from './orders/customer/OrderPage'
 import Orders from './orders/seller/Orders'
 
 function App() {
@@ -20,7 +20,6 @@ function App() {
           <Route path="/Admin" element={<Orders />} />
         </Routes>
       </div>
-      {/* <Footer /> */}
     </>
   )
 }

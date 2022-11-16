@@ -10,6 +10,7 @@ exports.up = function (knex) {
     table.bool('quacamole')
     table.bool('sour_cream')
     table.bool('cheese')
+    table.string('order_status')
   })
 }
 
