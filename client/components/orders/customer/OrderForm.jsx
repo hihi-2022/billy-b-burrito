@@ -1,9 +1,14 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { submitOrder } from '../../../apiClient'
+
+import { updateWaitTime } from '../../../actions/time'
 
 import ElementBool from './ElementBool'
 
 export default function OrderForm({ hasOrderedFunc }) {
+  const dispatch = useDispatch()
+
   const [order, setOrder] = useState({
     filling: '',
     rice: false,
@@ -13,11 +18,13 @@ export default function OrderForm({ hasOrderedFunc }) {
     tomato: false,
     cheese: false,
     sour_cream: false,
+    order_status: 'in queue',
   })
 
   function handleOrder(e) {
     e.preventDefault()
     submitOrder(order)
+    dispatch(updateWaitTime(order))
     hasOrderedFunc(true)
   }
 
@@ -38,10 +45,8 @@ export default function OrderForm({ hasOrderedFunc }) {
         <input name="name" onChange={handleInput}></input>
         <br></br>
         <label htmlFor="filling">Choose your main filling:</label>
-        <select name="filling" id="filling" onChange={handleInput}>
-          <option disabled selected value>
-            select
-          </option>
+        <select value="select" name="filling" onChange={handleInput}>
+          <option disabled>select</option>
           <option value="chicken">Chicken</option>
           <option value="beef">Beef</option>
           <option value="jack fruit">Jack fruit</option>

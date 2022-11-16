@@ -10,7 +10,12 @@ function getAllOrders(db = conn) {
   return db('orders').select()
 }
 
+function updateOrder(id, newOrder, db = conn) {
+  return db('orders').update(newOrder).where('id', id)
+}
+
 module.exports = {
   addOrder,
   getAllOrders,
+  updateOrder,
 }

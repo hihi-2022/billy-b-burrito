@@ -1,7 +1,10 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
 import { updateOrderThunk } from '../../../actions/orders'
+import { updateWaitTime } from '../../../actions/time'
 
 export default function Order(props) {
+  const dispatch = useDispatch()
   const {
     id,
     name,
@@ -16,19 +19,17 @@ export default function Order(props) {
     order_status,
   } = props.order
 
-  // const [order, setOrder] = useState(props.order)
-
   function handleClick(e) {
-    const newStatus = e.target.value
+    const newStatus = e.target.id
     const newOrder = { ...props.order, order_status: newStatus }
-    // setOrder(newOrder)
-    updateOrderThunk(newOrder)
+    dispatch(updateOrderThunk(newOrder))
+    dispatch(updateWaitTime(newOrder))
   }
 
   return (
     <div className="flex flex-col mx-8 my-8 bg-slate-400 w-60">
       <ul className="list-none">
-        <li className="text-xl my-4 font-bold">Order #: {id}</li>
+        <li className="text-xl my-4 font-bold">Order #{id}</li>
         <li>Name: {name}</li>
         <li>Filling: {filling}</li>
         <li>Rice: {rice}</li>
@@ -39,9 +40,13 @@ export default function Order(props) {
         <li>Sour Cream: {sour_cream}</li>
         <li>Quacamole: {quacamole}</li>
       </ul>
-      <h1>Status: {order_status}</h1>
-      <button className="bg-white text-black mx-2 my-2" onClick={handleClick}>
-        Order completed
+      <h1 className="text-red-500 text-lg font-bold">{order_status}</h1>
+      <button
+        className="bg-white text-black mx-2 my-2"
+        id="order completed"
+        onClick={handleClick}
+      >
+        Mark as completed
       </button>
     </div>
   )

@@ -3443,13 +3443,46 @@ function getOrdersThunk() {
 }
 
 // update order status
-function updateOrderThunk(updatedOrder) {
+function updateOrderThunk(newOrder) {
   return dispatch => {
-    (0,_apiClient__WEBPACK_IMPORTED_MODULE_0__.updateOrderStatus)(updatedOrder).then(() => {
-      dispatch(updateOrdersAction(updatedOrder));
+    (0,_apiClient__WEBPACK_IMPORTED_MODULE_0__.updateOrder)(newOrder).then(() => {
+      dispatch(updateOrdersAction(newOrder));
     }).catch(err => {
       console.log(err.message);
     });
+  };
+}
+
+/***/ }),
+
+/***/ "./client/actions/time.js":
+/*!********************************!*\
+  !*** ./client/actions/time.js ***!
+  \********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "GET_WAIT_TIME": () => (/* binding */ GET_WAIT_TIME),
+/* harmony export */   "UPDATE_WAIT_TIME": () => (/* binding */ UPDATE_WAIT_TIME),
+/* harmony export */   "getWaitTime": () => (/* binding */ getWaitTime),
+/* harmony export */   "updateWaitTime": () => (/* binding */ updateWaitTime)
+/* harmony export */ });
+const UPDATE_WAIT_TIME = 'UPDATE_WAIT_TIME';
+const GET_WAIT_TIME = 'GET_WAIT_TIME';
+
+// ACTIONS
+function updateWaitTime(order) {
+  return {
+    type: UPDATE_WAIT_TIME,
+    payload: order
+  };
+}
+function getWaitTime(orders) {
+  return {
+    type: GET_WAIT_TIME,
+    payload: orders
   };
 }
 
@@ -3477,8 +3510,8 @@ function submitOrder(order) {
 function getAllOrders() {
   return superagent__WEBPACK_IMPORTED_MODULE_0___default().get('/api/orders').then(res => res.body);
 }
-function updateOrder(updatedOrder) {
-  return superagent__WEBPACK_IMPORTED_MODULE_0___default().patch('/api/orders').send(updatedOrder).then(res => res.body);
+function updateOrder(newOrder) {
+  return superagent__WEBPACK_IMPORTED_MODULE_0___default().patch('/api/orders').send(newOrder).then(res => res.body);
 }
 
 /***/ }),
@@ -3673,8 +3706,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ OrderForm)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _apiClient__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../apiClient */ "./client/apiClient.js");
-/* harmony import */ var _ElementBool__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ElementBool */ "./client/components/orders/customer/ElementBool.jsx");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _apiClient__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../apiClient */ "./client/apiClient.js");
+/* harmony import */ var _actions_time__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../actions/time */ "./client/actions/time.js");
+/* harmony import */ var _ElementBool__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ElementBool */ "./client/components/orders/customer/ElementBool.jsx");
+
+
 
 
 
@@ -3682,6 +3719,7 @@ function OrderForm(_ref) {
   let {
     hasOrderedFunc
   } = _ref;
+  const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
   const [order, setOrder] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
     filling: '',
     rice: false,
@@ -3690,11 +3728,13 @@ function OrderForm(_ref) {
     quacamole: false,
     tomato: false,
     cheese: false,
-    sour_cream: false
+    sour_cream: false,
+    order_status: 'in queue'
   });
   function handleOrder(e) {
     e.preventDefault();
-    (0,_apiClient__WEBPACK_IMPORTED_MODULE_1__.submitOrder)(order);
+    (0,_apiClient__WEBPACK_IMPORTED_MODULE_2__.submitOrder)(order);
+    dispatch((0,_actions_time__WEBPACK_IMPORTED_MODULE_3__.updateWaitTime)(order));
     hasOrderedFunc(true);
   }
   function handleInput(e) {
@@ -3716,44 +3756,42 @@ function OrderForm(_ref) {
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
     htmlFor: "filling"
   }, "Choose your main filling:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
+    value: "select",
     name: "filling",
-    id: "filling",
     onChange: handleInput
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
-    disabled: true,
-    selected: true,
-    value: true
+    disabled: true
   }, "select"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
     value: "chicken"
   }, "Chicken"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
     value: "beef"
   }, "Beef"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
     value: "jack fruit"
-  }, "Jack fruit")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ElementBool__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }, "Jack fruit")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ElementBool__WEBPACK_IMPORTED_MODULE_4__["default"], {
     name: "rice",
     label: "Rice",
     handleInputFunc: handleInput
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ElementBool__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ElementBool__WEBPACK_IMPORTED_MODULE_4__["default"], {
     name: "beans",
     label: "Beans",
     handleInputFunc: handleInput
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ElementBool__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ElementBool__WEBPACK_IMPORTED_MODULE_4__["default"], {
     name: "lettuce",
     label: "Lettuce",
     handleInputFunc: handleInput
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ElementBool__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ElementBool__WEBPACK_IMPORTED_MODULE_4__["default"], {
     name: "quacamole",
     label: "Quacamole",
     handleInputFunc: handleInput
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ElementBool__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ElementBool__WEBPACK_IMPORTED_MODULE_4__["default"], {
     name: "tomato",
     label: "Tomato",
     handleInputFunc: handleInput
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ElementBool__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ElementBool__WEBPACK_IMPORTED_MODULE_4__["default"], {
     name: "cheese",
     label: "Cheese",
     handleInputFunc: handleInput
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ElementBool__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ElementBool__WEBPACK_IMPORTED_MODULE_4__["default"], {
     name: "sour_cream",
     label: "Sour Cream",
     handleInputFunc: handleInput
@@ -3777,18 +3815,30 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _OrderForm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./OrderForm */ "./client/components/orders/customer/OrderForm.jsx");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _OrderForm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./OrderForm */ "./client/components/orders/customer/OrderForm.jsx");
+/* harmony import */ var _actions_time__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../actions/time */ "./client/actions/time.js");
+/* harmony import */ var _apiClient__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../apiClient */ "./client/apiClient.js");
 
-// import { useSelector } from 'react-redux'
+
+
 
 
 function Order() {
+  const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
   const [hasOrdered, setHasOrdered] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+  const waitTime = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(Reduxstore => Reduxstore.waitTime);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    (0,_apiClient__WEBPACK_IMPORTED_MODULE_4__.getAllOrders)().then(orders => {
+      console.log(orders);
+      dispatch((0,_actions_time__WEBPACK_IMPORTED_MODULE_3__.getWaitTime)(orders));
+    }).catch(err => err.message);
+  }, []);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: ""
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
     className: "text-2xl text-center font-['Poor_Story']"
-  }, "Current Estimated Wait time is x..."), hasOrdered ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Thank you for your order,", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), "Your xx in the queue") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_OrderForm__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  }, "Current Estimated Wait time is ", waitTime, " minutes"), hasOrdered ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Thank you for your order,", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), "Your xx in the queue") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_OrderForm__WEBPACK_IMPORTED_MODULE_2__["default"], {
     hasOrderedFunc: setHasOrdered
   }));
 }
@@ -3808,10 +3858,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ Order)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _actions_orders__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../actions/orders */ "./client/actions/orders.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_orders__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../actions/orders */ "./client/actions/orders.js");
+/* harmony import */ var _actions_time__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../actions/time */ "./client/actions/time.js");
+
+
 
 
 function Order(props) {
+  const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
   const {
     id,
     name,
@@ -3825,17 +3880,14 @@ function Order(props) {
     quacamole,
     order_status
   } = props.order;
-
-  // const [order, setOrder] = useState(props.order)
-
   function handleClick(e) {
-    const newStatus = e.target.value;
+    const newStatus = e.target.id;
     const newOrder = {
       ...props.order,
       order_status: newStatus
     };
-    // setOrder(newOrder)
-    (0,_actions_orders__WEBPACK_IMPORTED_MODULE_1__.updateOrderThunk)(newOrder);
+    dispatch((0,_actions_orders__WEBPACK_IMPORTED_MODULE_2__.updateOrderThunk)(newOrder));
+    dispatch((0,_actions_time__WEBPACK_IMPORTED_MODULE_3__.updateWaitTime)(newOrder));
   }
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "flex flex-col mx-8 my-8 bg-slate-400 w-60"
@@ -3843,10 +3895,13 @@ function Order(props) {
     className: "list-none"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
     className: "text-xl my-4 font-bold"
-  }, "Order #: ", id), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Name: ", name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Filling: ", filling), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Rice: ", rice), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Beans: ", beans), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Lettuce: ", lettuce), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Tomato: ", tomato), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Cheese: ", cheese), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Sour Cream: ", sour_cream), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Quacamole: ", quacamole)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Status: ", order_status), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+  }, "Order #", id), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Name: ", name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Filling: ", filling), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Rice: ", rice), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Beans: ", beans), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Lettuce: ", lettuce), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Tomato: ", tomato), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Cheese: ", cheese), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Sour Cream: ", sour_cream), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Quacamole: ", quacamole)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
+    className: "text-red-500 text-lg font-bold"
+  }, order_status), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
     className: "bg-white text-black mx-2 my-2",
+    id: "order completed",
     onClick: handleClick
-  }, "Order completed"));
+  }, "Mark as completed"));
 }
 
 /***/ }),
@@ -3865,10 +3920,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_orders__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../actions/orders */ "./client/actions/orders.js");
-/* harmony import */ var _Order__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Order */ "./client/components/orders/seller/Order.jsx");
+/* harmony import */ var _actions_time__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../actions/time */ "./client/actions/time.js");
+/* harmony import */ var _Order__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Order */ "./client/components/orders/seller/Order.jsx");
 
 
 // import { getAllOrders } from '../../../apiClient'
+
 
 
 
@@ -3876,12 +3933,14 @@ function Orders() {
   // const [orders, setOrders] = useState(null)
   const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
   const orders = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(Reduxstore => Reduxstore.orders);
+  const waitTime = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(Reduxstore => Reduxstore.waitTime);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     dispatch((0,_actions_orders__WEBPACK_IMPORTED_MODULE_2__.getOrdersThunk)());
+    dispatch((0,_actions_time__WEBPACK_IMPORTED_MODULE_3__.getWaitTime)(orders));
   }, [orders]);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Latest orders"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Current wait time is ", waitTime), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "flex flex-wrap"
-  }, orders && orders.map(order => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Order__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, orders && orders.map(order => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Order__WEBPACK_IMPORTED_MODULE_4__["default"], {
     key: order.id,
     order: order
   }))));
@@ -3900,12 +3959,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _orders__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./orders */ "./client/reducers/orders.js");
+/* harmony import */ var _waitTime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./waitTime */ "./client/reducers/waitTime.js");
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,redux__WEBPACK_IMPORTED_MODULE_1__.combineReducers)({
-  orders: _orders__WEBPACK_IMPORTED_MODULE_0__["default"]
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,redux__WEBPACK_IMPORTED_MODULE_2__.combineReducers)({
+  orders: _orders__WEBPACK_IMPORTED_MODULE_0__["default"],
+  waitTime: _waitTime__WEBPACK_IMPORTED_MODULE_1__["default"]
 }));
 
 /***/ }),
@@ -3942,6 +4004,53 @@ const ordersReducer = function () {
   }
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ordersReducer);
+
+/***/ }),
+
+/***/ "./client/reducers/waitTime.js":
+/*!*************************************!*\
+  !*** ./client/reducers/waitTime.js ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _actions_time__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/time */ "./client/actions/time.js");
+
+const waitTimeReducer = function () {
+  let state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+  let action = arguments.length > 1 ? arguments[1] : undefined;
+  const {
+    type,
+    payload
+  } = action;
+  switch (type) {
+    case _actions_time__WEBPACK_IMPORTED_MODULE_0__.GET_WAIT_TIME:
+      state = 0;
+      payload.forEach(element => {
+        if (element.order_status === 'in queue') {
+          state += 2;
+        }
+      });
+      return state;
+    case _actions_time__WEBPACK_IMPORTED_MODULE_0__.UPDATE_WAIT_TIME:
+      console.log('in reducer');
+      console.log(payload);
+      if (payload.order_status && payload.order_status === 'in queue') {
+        return state + 2;
+      } else if (payload.order_status && payload.order_status === 'order completed') {
+        return state - 2;
+      } else {
+        return state;
+      }
+    default:
+      return state;
+  }
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (waitTimeReducer);
 
 /***/ }),
 

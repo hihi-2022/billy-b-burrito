@@ -11,9 +11,9 @@ export function getAllOrders() {
   return request.get('/api/orders').then((res) => res.body)
 }
 
-export function updateOrder(updatedOrder) {
+export function updateOrder(newOrder) {
   return request
     .patch('/api/orders')
-    .send(updatedOrder)
+    .send(newOrder)
     .then((res) => res.body)
 }

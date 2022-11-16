@@ -1,4 +1,4 @@
-import { getAllOrders, updateOrderStatus } from '../apiClient'
+import { getAllOrders, updateOrder } from '../apiClient'
 
 export const GET_ORDERS = 'GET_ORDERS'
 export const UPDATE_ORDERS = 'UPDATE_ORDERS'
@@ -36,11 +36,11 @@ export function getOrdersThunk() {
 }
 
 // update order status
-export function updateOrderThunk(updatedOrder) {
+export function updateOrderThunk(newOrder) {
   return (dispatch) => {
-    updateOrderStatus(updatedOrder)
+    updateOrder(newOrder)
       .then(() => {
-        dispatch(updateOrdersAction(updatedOrder))
+        dispatch(updateOrdersAction(newOrder))
       })
       .catch((err) => {
         console.log(err.message)

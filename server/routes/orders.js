@@ -29,4 +29,17 @@ router.get('/', (req, res) => {
     .catch((err) => res.status(500).json({ message: err.message }))
 })
 
+// PATCH /api/orders
+
+router.patch('/', (req, res) => {
+  const newOrder = req.body
+  const id = req.body.id
+  dbFuncs
+    .updateOrder(id, newOrder)
+    .then((order) => {
+      res.json(order)
+    })
+    .catch((err) => res.status(500).json({ message: err.message }))
+})
+
 module.exports = router
