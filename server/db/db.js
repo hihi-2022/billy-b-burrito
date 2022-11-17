@@ -10,6 +10,10 @@ function getAllOrders(db = conn) {
   return db('orders').select()
 }
 
+function getQueuedOrders(db = conn) {
+  return db('orders').select().where('order_status', 'in queue')
+}
+
 function updateOrder(id, newOrder, db = conn) {
   return db('orders').update(newOrder).where('id', id)
 }
@@ -18,4 +22,5 @@ module.exports = {
   addOrder,
   getAllOrders,
   updateOrder,
+  getQueuedOrders,
 }

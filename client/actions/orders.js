@@ -1,14 +1,15 @@
-import { getAllOrders, updateOrder } from '../apiClient'
+import { getQueuedOrders, updateOrder } from '../apiClient'
 
 export const GET_ORDERS = 'GET_ORDERS'
 export const UPDATE_ORDERS = 'UPDATE_ORDERS'
+export const GET_QUEUED_ORDERS = 'GET_QUEUED_ORDERS'
 // export const DELETE_ART = 'DELETE_ART'
 
 // ACTIONS
-export function getOrdersAction(orders) {
+export function getQueuedOrdersAction(queuedOrders) {
   return {
-    type: GET_ORDERS,
-    payload: orders,
+    type: GET_QUEUED_ORDERS,
+    payload: queuedOrders,
   }
 }
 
@@ -23,11 +24,11 @@ export function updateOrdersAction(updatedOrder) {
 
 // THUNKS
 // Get orders
-export function getOrdersThunk() {
+export function getQueuedOrdersThunk() {
   return (dispatch) => {
-    getAllOrders()
+    getQueuedOrders()
       .then((orders) => {
-        dispatch(getOrdersAction(orders))
+        dispatch(getQueuedOrdersAction(orders))
       })
       .catch((err) => {
         console.log(err.message)
