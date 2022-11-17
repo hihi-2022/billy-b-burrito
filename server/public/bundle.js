@@ -3545,7 +3545,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function App() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_common_Nav_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    className: "bg-[#FDFCDC] text-black h-screen flex justify-center"
+    className: "bg-[#FDF0D5] text-black h-screen flex justify-center"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Routes, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
     path: "/Login",
     element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_authentication_Login_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], null)
@@ -3580,7 +3580,36 @@ __webpack_require__.r(__webpack_exports__);
 // import { Link } from 'react-router-dom'
 
 function Login() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", null, "Login"));
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "py-40"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "form-control w-80"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+    className: "label cursor-pointer"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+    className: "label-text text-black text-base"
+  }, "Login as Admin"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+    type: "checkbox",
+    className: "toggle",
+    checked: true
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "flex justify-between items-center px-1"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+    htmlFor: "email"
+  }, "Email:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+    name: "email",
+    className: "my-2 w-56 text-sm h-6"
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "flex justify-between items-center px-1"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+    htmlFor: "password"
+  }, "Password: "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+    type: "password",
+    name: "password",
+    className: "my-2 w-56"
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+    className: "btn my-8 mx-20"
+  }, "Login"))));
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Login);
 
@@ -3603,7 +3632,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function Nav() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    className: "navbar bg-[#F07167]"
+    className: "navbar bg-[#F0544F]"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "flex-1"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
@@ -3616,7 +3645,7 @@ function Nav() {
     className: "flex-none"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
     to: "/Login",
-    className: "btn bg-[#00AFB9] border-0 normal-case text-xl text-white"
+    className: "btn bg-[#3A3335] border-0 normal-case text-xl text-white"
   }, "Login")));
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Nav);
@@ -3649,12 +3678,12 @@ function Home() {
       src: "../../images/burrito.png",
       alt: "burritto"
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
-      className: "font-['Poor_Story'] text-5xl text-[#00AFB9] text-center"
+      className: "font-['Poor_Story'] text-5xl text-[#3A3335] text-center"
     }, "Billy-B's Burrittos"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
       className: "py-5"
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
       to: "/Order",
-      className: "btn sm:btn-sm md:btn-md lg:btn-lg bg-[#00AFB9] text-white border-0"
+      className: "btn sm:btn-sm md:btn-md lg:btn-lg bg-[#3A3335] text-white border-0"
     }, "Place Order"))
     // </div>
   );
@@ -3683,13 +3712,16 @@ function ElementBool(props) {
     name,
     handleInputFunc
   } = props;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "flex justify-between"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
     htmlFor: name
   }, label), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+    className: "w-5 h-auto",
     type: "checkbox",
     name: name,
     onChange: handleInputFunc
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null));
+  }));
 }
 
 /***/ }),
@@ -3747,16 +3779,22 @@ function OrderForm(_ref) {
     setOrder(newOrder);
   }
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    className: "bg-[#00AFB9] flex flex-col py-5 h-fit my-8"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+    className: "flex flex-col py-5 mx-4 h-fit my-8 bg-[#C6D8D3] items-center rounded-md w-80"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "flex-col flex justify-center my-4"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
     htmlFor: "name"
-  }, "Please enter name for order: "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+  }, "Please enter name for order:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
     name: "name",
+    className: "rounded-sm",
     onChange: handleInput
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "flex flex-col"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
     htmlFor: "filling"
   }, "Choose your main filling:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
-    value: "select",
+    className: "text-white rounded-sm",
+    defaultValue: "select",
     name: "filling",
     onChange: handleInput
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
@@ -3767,7 +3805,7 @@ function OrderForm(_ref) {
     value: "beef"
   }, "Beef"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
     value: "jack fruit"
-  }, "Jack fruit")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ElementBool__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }, "Jack fruit"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ElementBool__WEBPACK_IMPORTED_MODULE_4__["default"], {
     name: "rice",
     label: "Rice",
     handleInputFunc: handleInput
@@ -3795,10 +3833,12 @@ function OrderForm(_ref) {
     name: "sour_cream",
     label: "Sour Cream",
     handleInputFunc: handleInput
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-    className: "btn bg-slate-600 border-0 text-sm text-white my-2",
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "flex justify-center my-6"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+    className: "btn bg-[#3A3335] border-0 text-sm text-white my-2 self-center",
     onClick: handleOrder
-  }, "Submit Order")));
+  }, "Submit Order"))));
 }
 
 /***/ }),
@@ -3834,13 +3874,13 @@ function Order() {
       dispatch((0,_actions_time__WEBPACK_IMPORTED_MODULE_3__.getWaitTime)(orders));
     }).catch(err => err.message);
   }, []);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    className: ""
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
-    className: "text-2xl text-center font-['Poor_Story']"
-  }, "Current Estimated Wait time is ", waitTime, " minutes"), hasOrdered ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Thank you for your order,", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), "Your xx in the queue") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_OrderForm__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, hasOrdered ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "text-xl bg-[#C6D8D3] px-6 py-6 rounded-lg my-12"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Your order was submitted successfully!")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
+    className: "text-2xl text-center font-['Poor_Story'] my-6"
+  }, "Current Estimated Wait time is ", waitTime, " minutes"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_OrderForm__WEBPACK_IMPORTED_MODULE_2__["default"], {
     hasOrderedFunc: setHasOrdered
-  }));
+  })));
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Order);
 

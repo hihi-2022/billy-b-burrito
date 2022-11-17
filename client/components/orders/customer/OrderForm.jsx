@@ -39,18 +39,30 @@ export default function OrderForm({ hasOrderedFunc }) {
   }
 
   return (
-    <div className="bg-[#00AFB9] flex flex-col py-5 h-fit my-8">
+    <div className="flex flex-col py-5 mx-4 h-fit my-8 bg-[#C6D8D3] items-center rounded-md w-80">
       <form>
-        <label htmlFor="name">Please enter name for order: </label>
-        <input name="name" onChange={handleInput}></input>
-        <br></br>
-        <label htmlFor="filling">Choose your main filling:</label>
-        <select value="select" name="filling" onChange={handleInput}>
-          <option disabled>select</option>
-          <option value="chicken">Chicken</option>
-          <option value="beef">Beef</option>
-          <option value="jack fruit">Jack fruit</option>
-        </select>
+        <div className="flex-col flex justify-center my-4">
+          <label htmlFor="name">Please enter name for order:</label>
+          <input
+            name="name"
+            className="rounded-sm"
+            onChange={handleInput}
+          ></input>
+        </div>
+        <div className="flex flex-col">
+          <label htmlFor="filling">Choose your main filling:</label>
+          <select
+            className="text-white rounded-sm"
+            defaultValue="select"
+            name="filling"
+            onChange={handleInput}
+          >
+            <option disabled>select</option>
+            <option value="chicken">Chicken</option>
+            <option value="beef">Beef</option>
+            <option value="jack fruit">Jack fruit</option>
+          </select>
+        </div>
         <br></br>
         {/* TODO: Make this dynamic - draws from ingredient list in database, maps through and lists out. */}
         <ElementBool name="rice" label="Rice" handleInputFunc={handleInput} />
@@ -80,12 +92,14 @@ export default function OrderForm({ hasOrderedFunc }) {
           label="Sour Cream"
           handleInputFunc={handleInput}
         />
-        <button
-          className="btn bg-slate-600 border-0 text-sm text-white my-2"
-          onClick={handleOrder}
-        >
-          Submit Order
-        </button>
+        <div className="flex justify-center my-6">
+          <button
+            className="btn bg-[#3A3335] border-0 text-sm text-white my-2 self-center"
+            onClick={handleOrder}
+          >
+            Submit Order
+          </button>
+        </div>
       </form>
     </div>
   )

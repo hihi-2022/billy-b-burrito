@@ -10,13 +10,13 @@ function Home() {
         src="../../images/burrito.png"
         alt="burritto"
       ></img>
-      <h1 className="font-['Poor_Story'] text-5xl text-[#00AFB9] text-center">
+      <h1 className="font-['Poor_Story'] text-5xl text-[#3A3335] text-center">
         Billy-B&apos;s Burrittos
       </h1>
       <span className="py-5"></span>
       <Link
         to="/Order"
-        className="btn sm:btn-sm md:btn-md lg:btn-lg bg-[#00AFB9] text-white border-0"
+        className="btn sm:btn-sm md:btn-md lg:btn-lg bg-[#3A3335] text-white border-0"
       >
         Place Order
       </Link>

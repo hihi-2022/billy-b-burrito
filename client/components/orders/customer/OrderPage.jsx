@@ -20,17 +20,18 @@ function Order() {
   }, [])
 
   return (
-    <div className="">
-      {/* //TODO: dynamically populate wait time */}
-      <h1 className="text-2xl text-center font-['Poor_Story']">
-        Current Estimated Wait time is {waitTime} minutes
-      </h1>
+    <div>
       {hasOrdered ? (
-        <h3>
-          Thank you for your order,<br></br>Your xx in the queue
-        </h3>
+        <div className="text-xl bg-[#C6D8D3] px-6 py-6 rounded-lg my-12">
+          <p>Your order was submitted successfully!</p>
+        </div>
       ) : (
-        <OrderForm hasOrderedFunc={setHasOrdered} />
+        <>
+          <h1 className="text-2xl text-center font-['Poor_Story'] my-6">
+            Current Estimated Wait time is {waitTime} minutes
+          </h1>
+          <OrderForm hasOrderedFunc={setHasOrdered} />
+        </>
       )}
     </div>
   )

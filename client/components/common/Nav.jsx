@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 function Nav() {
   return (
-    <div className="navbar bg-[#F07167]">
+    <div className="navbar bg-[#F0544F]">
       <div className="flex-1">
         <Link to="/" className="btn btn-ghost normal-case text-xl text-white">
           Home
@@ -18,7 +18,7 @@ function Nav() {
       <div className="flex-none">
         <Link
           to="/Login"
-          className="btn bg-[#00AFB9] border-0 normal-case text-xl text-white"
+          className="btn bg-[#3A3335] border-0 normal-case text-xl text-white"
         >
           Login
         </Link>
