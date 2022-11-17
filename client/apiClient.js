@@ -7,8 +7,8 @@ export function submitOrder(order) {
     .then((res) => res.body)
 }
 
-export function getAllOrders() {
-  return request.get('/api/orders').then((res) => res.body)
+export function getQueuedOrders() {
+  return request.get('/api/orders/queued').then((res) => res.body)
 }
 
 export function updateOrder(newOrder) {

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 // import { getAllOrders } from '../../../apiClient'
 
-import { getOrdersThunk } from '../../../actions/orders'
+import { getQueuedOrdersThunk } from '../../../actions/orders'
 import { getWaitTime } from '../../../actions/time'
 
 import Order from './Order'
@@ -14,7 +14,7 @@ export default function Orders() {
   const waitTime = useSelector((Reduxstore) => Reduxstore.waitTime)
 
   useEffect(() => {
-    dispatch(getOrdersThunk())
+    dispatch(getQueuedOrdersThunk())
     dispatch(getWaitTime(orders))
   }, [orders])
 

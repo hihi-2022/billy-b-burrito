@@ -3402,9 +3402,10 @@ function getTargetMatch(matches, location) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "GET_ORDERS": () => (/* binding */ GET_ORDERS),
+/* harmony export */   "GET_QUEUED_ORDERS": () => (/* binding */ GET_QUEUED_ORDERS),
 /* harmony export */   "UPDATE_ORDERS": () => (/* binding */ UPDATE_ORDERS),
-/* harmony export */   "getOrdersAction": () => (/* binding */ getOrdersAction),
-/* harmony export */   "getOrdersThunk": () => (/* binding */ getOrdersThunk),
+/* harmony export */   "getQueuedOrdersAction": () => (/* binding */ getQueuedOrdersAction),
+/* harmony export */   "getQueuedOrdersThunk": () => (/* binding */ getQueuedOrdersThunk),
 /* harmony export */   "updateOrderThunk": () => (/* binding */ updateOrderThunk),
 /* harmony export */   "updateOrdersAction": () => (/* binding */ updateOrdersAction)
 /* harmony export */ });
@@ -3412,13 +3413,14 @@ __webpack_require__.r(__webpack_exports__);
 
 const GET_ORDERS = 'GET_ORDERS';
 const UPDATE_ORDERS = 'UPDATE_ORDERS';
+const GET_QUEUED_ORDERS = 'GET_QUEUED_ORDERS';
 // export const DELETE_ART = 'DELETE_ART'
 
 // ACTIONS
-function getOrdersAction(orders) {
+function getQueuedOrdersAction(queuedOrders) {
   return {
-    type: GET_ORDERS,
-    payload: orders
+    type: GET_QUEUED_ORDERS,
+    payload: queuedOrders
   };
 }
 function updateOrdersAction(updatedOrder) {
@@ -3432,10 +3434,10 @@ function updateOrdersAction(updatedOrder) {
 
 // THUNKS
 // Get orders
-function getOrdersThunk() {
+function getQueuedOrdersThunk() {
   return dispatch => {
-    (0,_apiClient__WEBPACK_IMPORTED_MODULE_0__.getAllOrders)().then(orders => {
-      dispatch(getOrdersAction(orders));
+    (0,_apiClient__WEBPACK_IMPORTED_MODULE_0__.getQueuedOrders)().then(orders => {
+      dispatch(getQueuedOrdersAction(orders));
     }).catch(err => {
       console.log(err.message);
     });
@@ -3497,7 +3499,7 @@ function getWaitTime(orders) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "getAllOrders": () => (/* binding */ getAllOrders),
+/* harmony export */   "getQueuedOrders": () => (/* binding */ getQueuedOrders),
 /* harmony export */   "submitOrder": () => (/* binding */ submitOrder),
 /* harmony export */   "updateOrder": () => (/* binding */ updateOrder)
 /* harmony export */ });
@@ -3507,8 +3509,8 @@ __webpack_require__.r(__webpack_exports__);
 function submitOrder(order) {
   return superagent__WEBPACK_IMPORTED_MODULE_0___default().post('/api/orders').send(order).then(res => res.body);
 }
-function getAllOrders() {
-  return superagent__WEBPACK_IMPORTED_MODULE_0___default().get('/api/orders').then(res => res.body);
+function getQueuedOrders() {
+  return superagent__WEBPACK_IMPORTED_MODULE_0___default().get('/api/orders/queued').then(res => res.body);
 }
 function updateOrder(newOrder) {
   return superagent__WEBPACK_IMPORTED_MODULE_0___default().patch('/api/orders').send(newOrder).then(res => res.body);
@@ -3869,7 +3871,7 @@ function Order() {
   const [hasOrdered, setHasOrdered] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
   const waitTime = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(Reduxstore => Reduxstore.waitTime);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-    (0,_apiClient__WEBPACK_IMPORTED_MODULE_4__.getAllOrders)().then(orders => {
+    (0,_apiClient__WEBPACK_IMPORTED_MODULE_4__.getQueuedOrders)().then(orders => {
       console.log(orders);
       dispatch((0,_actions_time__WEBPACK_IMPORTED_MODULE_3__.getWaitTime)(orders));
     }).catch(err => err.message);
@@ -3917,8 +3919,7 @@ function Order(props) {
     tomato,
     cheese,
     sour_cream,
-    quacamole,
-    order_status
+    quacamole
   } = props.order;
   function handleClick(e) {
     const newStatus = e.target.id;
@@ -3935,9 +3936,7 @@ function Order(props) {
     className: "list-none"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
     className: "text-xl my-4 font-bold"
-  }, "Order #", id), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Name: ", name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Filling: ", filling), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Rice: ", rice), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Beans: ", beans), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Lettuce: ", lettuce), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Tomato: ", tomato), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Cheese: ", cheese), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Sour Cream: ", sour_cream), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Quacamole: ", quacamole)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
-    className: "text-red-500 text-lg font-bold"
-  }, order_status), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+  }, "Order #", id), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Name: ", name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Filling: ", filling), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Rice: ", rice), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Beans: ", beans), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Lettuce: ", lettuce), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Tomato: ", tomato), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Cheese: ", cheese), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Sour Cream: ", sour_cream), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Quacamole: ", quacamole)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
     className: "bg-white text-black mx-2 my-2",
     id: "order completed",
     onClick: handleClick
@@ -3975,7 +3974,7 @@ function Orders() {
   const orders = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(Reduxstore => Reduxstore.orders);
   const waitTime = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(Reduxstore => Reduxstore.waitTime);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-    dispatch((0,_actions_orders__WEBPACK_IMPORTED_MODULE_2__.getOrdersThunk)());
+    dispatch((0,_actions_orders__WEBPACK_IMPORTED_MODULE_2__.getQueuedOrdersThunk)());
     dispatch((0,_actions_time__WEBPACK_IMPORTED_MODULE_3__.getWaitTime)(orders));
   }, [orders]);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Current wait time is ", waitTime), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -4034,6 +4033,8 @@ const ordersReducer = function () {
   } = action;
   switch (type) {
     case _actions_orders__WEBPACK_IMPORTED_MODULE_0__.GET_ORDERS:
+      return payload;
+    case _actions_orders__WEBPACK_IMPORTED_MODULE_0__.GET_QUEUED_ORDERS:
       return payload;
     case _actions_orders__WEBPACK_IMPORTED_MODULE_0__.UPDATE_ORDERS:
       console.log('updating_orders');

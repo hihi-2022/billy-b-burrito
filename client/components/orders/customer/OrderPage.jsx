@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import OrderForm from './OrderForm'
 import { getWaitTime } from '../../../actions/time'
-import { getAllOrders } from '../../../apiClient'
+import { getQueuedOrders } from '../../../apiClient'
 
 function Order() {
   const dispatch = useDispatch()
@@ -11,7 +11,7 @@ function Order() {
   const waitTime = useSelector((Reduxstore) => Reduxstore.waitTime)
 
   useEffect(() => {
-    getAllOrders()
+    getQueuedOrders()
       .then((orders) => {
         console.log(orders)
         dispatch(getWaitTime(orders))

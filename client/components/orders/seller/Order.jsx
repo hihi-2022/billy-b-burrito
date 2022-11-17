@@ -16,7 +16,6 @@ export default function Order(props) {
     cheese,
     sour_cream,
     quacamole,
-    order_status,
   } = props.order
 
   function handleClick(e) {
@@ -40,7 +39,6 @@ export default function Order(props) {
         <li>Sour Cream: {sour_cream}</li>
         <li>Quacamole: {quacamole}</li>
       </ul>
-      <h1 className="text-red-500 text-lg font-bold">{order_status}</h1>
       <button
         className="bg-white text-black mx-2 my-2"
         id="order completed"

@@ -20,9 +20,9 @@ router.post('/', (req, res) => {
 
 // GET /api/orders
 
-router.get('/', (req, res) => {
+router.get('/queued/', (req, res) => {
   dbFuncs
-    .getAllOrders()
+    .getQueuedOrders()
     .then((orders) => {
       res.json(orders)
     })
