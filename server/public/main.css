@@ -2546,6 +2546,18 @@ html {
   margin-left: 50%;
 }
 
+.m-6 {
+  margin: 1.5rem;
+}
+
+.m-8 {
+  margin: 2rem;
+}
+
+.m-2 {
+  margin: 0.5rem;
+}
+
 .mx-8 {
   margin-left: 2rem;
   margin-right: 2rem;
@@ -2604,6 +2616,11 @@ html {
 .my-12 {
   margin-top: 3rem;
   margin-bottom: 3rem;
+}
+
+.my-1 {
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
 }
 
 .flex {
@@ -2760,8 +2777,16 @@ html {
   place-self: center;
 }
 
+.self-end {
+  align-self: flex-end;
+}
+
 .self-center {
   align-self: center;
+}
+
+.justify-self-end {
+  justify-self: end;
 }
 
 .justify-self-center {
@@ -2778,6 +2803,10 @@ html {
 
 .rounded-lg {
   border-radius: 0.5rem;
+}
+
+.rounded-xl {
+  border-radius: 0.75rem;
 }
 
 .border-0 {
@@ -2837,6 +2866,19 @@ html {
 .bg-\[\#C6D8D3\] {
   --tw-bg-opacity: 1;
   background-color: rgb(198 216 211 / var(--tw-bg-opacity));
+}
+
+.bg-\[\#c6d8d3\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(198 216 211 / var(--tw-bg-opacity));
+}
+
+.p-8 {
+  padding: 2rem;
+}
+
+.p-4 {
+  padding: 1rem;
 }
 
 .py-20 {
@@ -2959,6 +3001,10 @@ html {
 
 .font-bold {
   font-weight: 700;
+}
+
+.capitalize {
+  text-transform: capitalize;
 }
 
 .normal-case {

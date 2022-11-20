@@ -12,7 +12,7 @@ function App() {
   return (
     <>
       <Nav />
-      <div className="bg-[#FDF0D5] text-black h-screen flex justify-center">
+      <div className="bg-[#FDF0D5] text-black flex justify-center">
         <Routes>
           <Route path="/Login" element={<Login />} />
           <Route path="/Order" element={<Order />} />

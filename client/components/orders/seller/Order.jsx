@@ -26,21 +26,23 @@ export default function Order(props) {
   }
 
   return (
-    <div className="flex flex-col mx-8 my-8 bg-slate-400 w-60">
-      <ul className="list-none">
-        <li className="text-xl my-4 font-bold">Order #{id}</li>
-        <li>Name: {name}</li>
-        <li>Filling: {filling}</li>
-        <li>Rice: {rice}</li>
-        <li>Beans: {beans}</li>
-        <li>Lettuce: {lettuce}</li>
-        <li>Tomato: {tomato}</li>
-        <li>Cheese: {cheese}</li>
-        <li>Sour Cream: {sour_cream}</li>
-        <li>Quacamole: {quacamole}</li>
-      </ul>
+    <div className="flex flex-col m-8 bg-[#c6d8d3] w-60 rounded-xl p-4">
+      <div className="mx-2">
+        <ul className="list-none">
+          <li className="text-xl my-1 font-bold">Order #{id}</li>
+          <li className="font-bold my-2">{name}</li>
+          <li className="capitalize">{filling}</li>
+          {rice ? <li></li> : <li>No Rice</li>}
+          {beans ? <li></li> : <li>No Beans</li>}
+          {lettuce ? <li></li> : <li>No Lettuce</li>}
+          {tomato ? <li></li> : <li>No Tomato</li>}
+          {cheese ? <li></li> : <li>No Cheese</li>}
+          {sour_cream ? <li></li> : <li>No Sour Cream</li>}
+          {quacamole ? <li></li> : <li>No Quacamole</li>}
+        </ul>
+      </div>
       <button
-        className="bg-white text-black mx-2 my-2"
+        className="bg-[#3A3335] text-white my-4 mx-2 rounded-md font-bold justify-self-end"
         id="order completed"
         onClick={handleClick}
       >

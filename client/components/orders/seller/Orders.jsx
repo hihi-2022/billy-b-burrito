@@ -20,7 +20,9 @@ export default function Orders() {
 
   return (
     <div>
-      <h1>Current wait time is {waitTime}</h1>
+      <h1 className="text-lg font-bold m-6">
+        Current customer wait time is {waitTime} minutes
+      </h1>
       <div className="flex flex-wrap">
         {orders &&
           orders.map((order) => <Order key={order.id} order={order} />)}

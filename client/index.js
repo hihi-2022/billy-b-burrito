@@ -1,6 +1,7 @@
 import React from 'react'
 import { render } from 'react-dom'
 import { BrowserRouter as Router } from 'react-router-dom'
+import { Auth0Provider } from '@auth0/auth0-react'
 import { Provider } from 'react-redux'
 
 import App from './components/App'
@@ -14,11 +15,18 @@ const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk)))
 
 document.addEventListener('DOMContentLoaded', () => {
   render(
-    <Provider store={store}>
-      <Router>
-        <App />
-      </Router>
-    </Provider>,
+    <Auth0Provider
+      domain="hihi-2022-kelsey.au.auth0.com"
+      clientId="cXKYFU8x1NBBnqkWBwxbQI4jFVXFbiic"
+      redirectUri={window.location.origin}
+      audience="https://ordering/api"
+    >
+      <Provider store={store}>
+        <Router>
+          <App />
+        </Router>
+      </Provider>
+    </Auth0Provider>,
     document.getElementById('app')
   )
 })
