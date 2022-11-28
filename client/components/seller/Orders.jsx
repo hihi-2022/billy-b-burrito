@@ -2,10 +2,10 @@ import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 // import { getAllOrders } from '../../../apiClient'
 
-import { getQueuedOrdersThunk } from '../../../actions/orders'
-import { getWaitTime } from '../../../actions/time'
+import { getQueuedOrdersThunk } from '../../actions/orders'
+import { getWaitTime } from '../../actions/time'
 
-import Order from './Order'
+import OrderItem from './OrderItem'
 
 export default function Orders() {
   // const [orders, setOrders] = useState(null)
@@ -20,12 +20,14 @@ export default function Orders() {
 
   return (
     <div>
-      <h1 className="text-lg font-bold m-6">
-        Current customer wait time is {waitTime} minutes
-      </h1>
+      <div className="bg-[#c6d8d3] rounded-md mx-8 my-4 text-center">
+        <h1 className="text-lg font-bold px-5">
+          Customer wait time is {waitTime} minutes
+        </h1>
+      </div>
       <div className="flex flex-wrap">
         {orders &&
-          orders.map((order) => <Order key={order.id} order={order} />)}
+          orders.map((order) => <OrderItem key={order.id} order={order} />)}
       </div>
     </div>
   )

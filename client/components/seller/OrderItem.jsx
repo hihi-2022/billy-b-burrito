@@ -1,9 +1,9 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { updateOrderThunk } from '../../../actions/orders'
-import { updateWaitTime } from '../../../actions/time'
+import { updateOrderThunk } from '../../actions/orders'
+import { updateWaitTime } from '../../actions/time'
 
-export default function Order(props) {
+export default function OrderItem(props) {
   const dispatch = useDispatch()
   const {
     id,
@@ -16,6 +16,8 @@ export default function Order(props) {
     cheese,
     sour_cream,
     quacamole,
+    hot_sauce,
+    spice_level,
   } = props.order
 
   function handleClick(e) {
@@ -39,6 +41,8 @@ export default function Order(props) {
           {cheese ? <li></li> : <li>No Cheese</li>}
           {sour_cream ? <li></li> : <li>No Sour Cream</li>}
           {quacamole ? <li></li> : <li>No Quacamole</li>}
+          {hot_sauce ? <li></li> : <li>No Hot sauce</li>}
+          {hot_sauce ? <li>Spice Level: {spice_level}</li> : <li></li>}
         </ul>
       </div>
       <button

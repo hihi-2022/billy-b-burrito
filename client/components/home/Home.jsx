@@ -1,10 +1,20 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { IfNotAuthenticated } from '../authentication/Authenticated'
+
+import { navigate } from '../../actions'
 
 function Home() {
+  const dispatch = useDispatch()
+
+  function clickHandler(e) {
+    const destination = e.target.name
+    dispatch(navigate(destination))
+  }
+
   return (
     // <div className="bg-[#FDFCDC] text-black h-screen flex justify-center">
-    <div className="space-y-6 flex flex-col py-20">
+    <div className="space-y-6 flex flex-col py-20 items-center">
       <img
         className="h-40 w-40 self-center"
         src="../../images/burrito.png"
@@ -14,12 +24,15 @@ function Home() {
         Billy-B&apos;s Burrittos
       </h1>
       <span className="py-5"></span>
-      <Link
-        to="/Order"
-        className="btn sm:btn-sm md:btn-md lg:btn-lg bg-[#3A3335] text-white border-0"
-      >
-        Place Order
-      </Link>
+      <IfNotAuthenticated>
+        <button
+          onClick={clickHandler}
+          className="btn sm:btn-sm md:btn-md lg:btn-lg bg-[#3A3335] text-white border-0 w-48"
+          name="order"
+        >
+          Place Order
+        </button>
+      </IfNotAuthenticated>
     </div>
     // </div>
   )

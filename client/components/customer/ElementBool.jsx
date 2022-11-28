@@ -1,7 +1,7 @@
 import React from 'react'
 
 export default function ElementBool(props) {
-  const { label, name, handleInputFunc } = props
+  const { label, name, handleInputFunc, value, checked, index } = props
 
   return (
     <div className="flex justify-between">
@@ -10,7 +10,12 @@ export default function ElementBool(props) {
         className="w-5 h-auto"
         type="checkbox"
         name={name}
-        onChange={handleInputFunc}
+        value={value}
+        checked={checked}
+        onChange={(e) => {
+          handleInputFunc(index, e)
+        }}
+        // defaultChecked={true}
       ></input>
     </div>
   )

@@ -17,3 +17,14 @@ export function updateOrder(newOrder) {
     .send(newOrder)
     .then((res) => res.body)
 }
+
+export function getStock() {
+  return request.get('/api/stock').then((res) => res.body)
+}
+
+export function updateStock(updatedQuant) {
+  return request
+    .patch('/api/stock')
+    .send(updatedQuant)
+    .then((res) => res.body)
+}

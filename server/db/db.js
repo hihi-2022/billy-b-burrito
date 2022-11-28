@@ -18,9 +18,19 @@ function updateOrder(id, newOrder, db = conn) {
   return db('orders').update(newOrder).where('id', id)
 }
 
+function getStock(db = conn) {
+  return db('stock').select()
+}
+
+function updateStock(id, newQuantity, db = conn) {
+  return db('stock').update(newQuantity).where('id', id)
+}
+
 module.exports = {
   addOrder,
   getAllOrders,
   updateOrder,
   getQueuedOrders,
+  getStock,
+  updateStock,
 }
